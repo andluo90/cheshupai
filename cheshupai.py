@@ -37,6 +37,11 @@ def auction(token,id,price):
 
 
 if __name__ == '__main__':
+    
+    #13650723808 30e068dda8d6dd71678e96531b0e749f
+    #18122445507 c28711a5f19224b07cb0bc018767de02
+    
     # get_token(18122445507)
     #auction('c28711a5f19224b07cb0bc018767de03',692374,125000)
     auction('c28711a5f19224b07cb0bc018767de03', 692449, 100000)
+    
