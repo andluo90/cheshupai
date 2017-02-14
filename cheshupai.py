@@ -2,7 +2,7 @@
 import urllib2,cookielib,json
 
 def get_token(phone_num):
-    #c28711a5f19224b07cb0bc018767de02 599408556
+
     auth_code = 'http://api.guazipai.com/customer/login/code/?phone=%d' %phone_num
     res  = urllib2.urlopen(auth_code)
     print res.read()
@@ -38,5 +38,5 @@ def auction(token,id,price):
 
 if __name__ == '__main__':
     # get_token(18122445507)
-    #auction('c28711a5f19224b07cb0bc018767de02',692374,125000)
-    auction('c28711a5f19224b07cb0bc018767de02', 692449, 100000)
+    #auction('c28711a5f19224b07cb0bc018767de03',692374,125000)
+    auction('c28711a5f19224b07cb0bc018767de03', 692449, 100000)
