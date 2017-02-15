@@ -60,18 +60,15 @@ def get_result(token,id):
         print 'Can not find the id %d' %id
 
 if __name__ == '__main__':
-    
-    
     phone_dict = {
         '13045866804':'c9c84464d13ee91b434ad22e7c809d9a',
-        '13650723808','30e068dda8d6dd71678e96531b0e749f',
-        '18122445507','c28711a5f19224b07cb0bc018767de02',
-        '13760808820','addf68fe42539c74d0b9e5ae510c9737'
-                  }
+        '13650723808':'30e068dda8d6dd71678e96531b0e749f',
+        '18122445507':'c28711a5f19224b07cb0bc018767de02',
+        '13760808820':'addf68fe42539c74d0b9e5ae510c9737'}
     
     
     # get_token(18122445507)
     #auction('c28711a5f19224b07cb0bc018767de03',692374,125000)
 
     #auction('c28711a5f19224b07cb0bc018767de03', 692449, 100000)
-    get_result('30e068dda8d6dd71678e96531b0e749f:',694130)
+    get_result(phone_dict['13760808820'],694130)
