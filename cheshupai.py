@@ -42,16 +42,30 @@ def auction(token,id,price):
 # profile_url = 'http://api.guazipai.com/customer/user/profile/'
 # response = opener.open(profile_url)
 
-
-
+def get_result(token,id):
+    #http://api.guazipai.com/customer/user/list/?page=1&status=0
+    usre_list = 'http://api.guazipai.com/customer/user/list/?page=1&status=0'
+    req = urllib2.Request(usre_list)
+    req.add_header('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36')
+    req.add_header('PAI-TOKEN',token)
+    response = urllib2.urlopen(req)
+    response = response.read()
+    result = json.loads(response)
+    list = result['data']['list']
+    for item in list:
+        if item['id'] == str(id):
+            for (k,v) in item.items():
+                print k,':',v
+    else:
+        print 'Can not find the id %d' %id
 
 if __name__ == '__main__':
-    
+    #13045866804 c9c84464d13ee91b434ad22e7c809d9a
     #13650723808 30e068dda8d6dd71678e96531b0e749f
     #18122445507 c28711a5f19224b07cb0bc018767de02
     
     # get_token(18122445507)
     #auction('c28711a5f19224b07cb0bc018767de03',692374,125000)
 
-    auction('c28711a5f19224b07cb0bc018767de03', 692449, 100000)
-    
+    #auction('c28711a5f19224b07cb0bc018767de03', 692449, 100000)
+    get_result('30e068dda8d6dd71678e96531b0e749f:',694130)
