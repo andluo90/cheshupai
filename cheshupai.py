@@ -1,5 +1,6 @@
 # -*-coding:utf-8-*-
 import urllib2,cookielib,json
+from datetime import datetime
 
 def get_token(phone_num):
 
@@ -17,6 +18,8 @@ def get_token(phone_num):
 
 def auction(token,id,price):
     # http://api.guazipai.com/customer/order/bid/?id=691419&price=8200&lat=0&lng=0&bread=f43f216e4f16fa7894dd90bbc786bf56
+    start = datetime.now()
+    print 'Start:',start.strftime('%Y-%m-%d %H:%M:%S')
     auction_url = 'http://api.guazipai.com/customer/order/bid/?id=%d&price=%d&lat=0&lng=0&bread=f43f216e4f16fa7894dd90bbc786bf56' %(id,price)
     req = urllib2.Request(auction_url)
     req.add_header('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36')
@@ -27,8 +30,14 @@ def auction(token,id,price):
     result = json.loads(response)
     print result['code']
     print result['message']
-    for item in result['data']['state']:
-        print '  ',item,result['data']['state'][item]
+    try:
+        for item in result['data']['state']:
+            print '  ',item,result['data']['state'][item]
+    except TypeError:
+        pass
+    end = datetime.now()
+    print 'End:',end.strftime('%Y-%m-%d %H:%M:%S')
+    print 'Elapsed time:',(end-start).seconds
 
 # profile_url = 'http://api.guazipai.com/customer/user/profile/'
 # response = opener.open(profile_url)
@@ -43,5 +52,6 @@ if __name__ == '__main__':
     
     # get_token(18122445507)
     #auction('c28711a5f19224b07cb0bc018767de03',692374,125000)
+
     auction('c28711a5f19224b07cb0bc018767de03', 692449, 100000)
     
