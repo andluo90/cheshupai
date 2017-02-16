@@ -1,6 +1,7 @@
 # -*-coding:utf-8-*-
 import urllib2,json,thread,time
 from datetime import datetime
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 
 def get_token(phone_num):
@@ -64,27 +65,26 @@ def get_result(token, id):
     else:
         print 'Can not find the id %d' % id
 
-def testaa(cont):
-    print cont
-
-if __name__ == '__main__':
+def run():
     phone_dict = {
         '13045866804': 'c9c84464d13ee91b434ad22e7c809d9a',
         '13650723808': '30e068dda8d6dd71678e96531b0e749f',
         '18122445507': 'c28711a5f19224b07cb0bc018767de02',
         '13760808820': 'addf68fe42539c74d0b9e5ae510c9737'}
     try:
-        thread.start_new_thread(auction,(phone_dict['13650723808'],692374,125000))
-        thread.start_new_thread(auction, (phone_dict['13650723808'], 692374, 125000))
-        thread.start_new_thread(auction, (phone_dict['13650723808'], 692374, 125000))
+        thread.start_new_thread(auction,(phone_dict['13045866804'],698079,70000))
+        #thread.start_new_thread(auction,(phone_dict['18122445507'],697864,45000))
     except Exception:
         print 'Thread start error...'
 
-    time.sleep(15)
+    time.sleep(30)
+    print 'done...'
 
 
-    # get_token(18122445507)
-    # auction('c28711a5f19224b07cb0bc018767de03',692374,125000)
+if __name__ == '__main__':
+    scheduler = BlockingScheduler()
+    scheduler.add_job(run, 'cron', day_of_week='1-5', hour=15, minute=28, second=03)
+    scheduler.start()
 
-    # auction('c28711a5f19224b07cb0bc018767de03', 692449, 100000)
-    #get_result(phone_dict['13760808820'], 694130)
+
+
