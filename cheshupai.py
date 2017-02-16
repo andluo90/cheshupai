@@ -22,9 +22,11 @@ def auction(token, id, price):
     # http://api.guazipai.com/customer/order/bid/?id=691419&price=8200&lat=0&lng=0&bread=f43f216e4f16fa7894dd90bbc786bf56
     start = datetime.now()
     print 'Start:', start.strftime('%Y-%m-%d %H:%M:%S')
-    auction_url = 'http://api.guazipai.com/customer/order/bid/?id=%d&price=%d&lat=0&lng=0&bread=f43f216e4f16fa7894dd90bbc786bf56' % (
+    auction_url = 'http://api.guazipai.com/customer/order/bid/?id=%d&price=%d&lat=0&lng=0&bread=f43f216e4f16fa7894dd90bbc786bf33' % (
     id, price)
     req = urllib2.Request(auction_url)
+    # req.add_header('User-Agent',
+    #                'Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 Mobile/14A346 Safari/602.1')
     req.add_header('User-Agent',
                    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36')
     req.add_header('PAI-TOKEN', token)
@@ -70,10 +72,12 @@ def run():
         '13045866804': 'c9c84464d13ee91b434ad22e7c809d9a',
         '13650723808': '30e068dda8d6dd71678e96531b0e749f',
         '18122445507': 'c28711a5f19224b07cb0bc018767de02',
-        '13760808820': 'addf68fe42539c74d0b9e5ae510c9737'}
+        '13760808820': 'addf68fe42539c74d0b9e5ae510c9737',
+        '18126600062': '31152f8bf095f23167996ccb182e0733'}
     try:
-        thread.start_new_thread(auction,(phone_dict['13045866804'],698079,70000))
-        #thread.start_new_thread(auction,(phone_dict['18122445507'],697864,45000))
+        thread.start_new_thread(auction,(phone_dict['18126600062'],699099,23000))
+
+
     except Exception:
         print 'Thread start error...'
 
@@ -83,8 +87,7 @@ def run():
 
 if __name__ == '__main__':
     scheduler = BlockingScheduler()
-    scheduler.add_job(run, 'cron', day_of_week='1-5', hour=15, minute=28, second=03)
+    scheduler.add_job(run, 'cron', day_of_week='1-5', hour=18, minute=00, second=05)
     scheduler.start()
-
 
 
