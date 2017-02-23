@@ -29,7 +29,7 @@ def auction(token, id, price,ssid):
     # req.add_header('User-Agent',
     #                'Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 Mobile/14A346 Safari/602.1')
     req.add_header('User-Agent',
-                   'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36')
+                   'Mozi1lla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36')
     req.add_header('PAI-TOKEN', token)
     response = request.urlopen(req)
     response = response.read().decode("UTF-8")
@@ -42,6 +42,9 @@ def auction(token, id, price,ssid):
             print ('  ', item, result['data']['state'][item])
     except TypeError:
         pass
+    except KeyError:
+        print("Key Error!")
+
     end = datetime.now()
     print ('End:', end.strftime('%Y-%m-%d %H:%M:%S'))
     print ('Elapsed time:', (end - start).seconds)
@@ -84,12 +87,18 @@ def run():
 
     time.sleep(30)
 
+def set_time_to_run(time=()):
+    if not time:
+        scheduler = BlockingScheduler()
+        scheduler.add_job(run, 'cron', day_of_week='1-7', hour=time[0], minute=time[1], second=time[2])
+        scheduler.start()
+        scheduler.shutdown()
+    else:
+        run()
 
 
 if __name__ == '__main__':
-    scheduler = BlockingScheduler()
-    scheduler.add_job(run, 'cron', day_of_week='1-5', hour=18, minute=00, second=5)
-    scheduler.start()
-    scheduler.shutdown()
+    time = (18,10,00)
+    set_time_to_run(time)
 
 
